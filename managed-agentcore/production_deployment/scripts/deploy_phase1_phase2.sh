@@ -162,6 +162,16 @@ echo ""
 
 cd "$SCRIPT_DIR/phase1"
 
+# Generate parameter file for this environment if missing (based on prod)
+PARAMS_DIR="$SCRIPT_DIR/../cloudformation/parameters"
+PARAMS_FILE="$PARAMS_DIR/phase1-${ENVIRONMENT}-params.json"
+if [ ! -f "$PARAMS_FILE" ]; then
+    echo -e "${YELLOW}Parameter file not found, generating from prod: $PARAMS_FILE${NC}"
+    sed "s/\"ParameterValue\": \"prod\"/\"ParameterValue\": \"${ENVIRONMENT}\"/" \
+        "$PARAMS_DIR/phase1-prod-params.json" > "$PARAMS_FILE"
+    echo ""
+fi
+
 ./deploy.sh "$ENVIRONMENT" \
     --region "$REGION" \
     --parameter-overrides \

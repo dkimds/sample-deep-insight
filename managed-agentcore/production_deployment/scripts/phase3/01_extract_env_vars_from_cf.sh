@@ -237,15 +237,15 @@ AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID
 # ============================================================
 # Bedrock Model Configuration
 # ============================================================
-DEFAULT_MODEL_ID=${EXISTING_DEFAULT_MODEL_ID:-global.anthropic.claude-sonnet-5}
+DEFAULT_MODEL_ID=${EXISTING_DEFAULT_MODEL_ID:-global.anthropic.claude-sonnet-4-5-20250929-v1:0}
 COORDINATOR_MODEL_ID=${EXISTING_COORDINATOR_MODEL_ID:-global.anthropic.claude-haiku-4-5-20251001-v1:0}
-PLANNER_MODEL_ID=${EXISTING_PLANNER_MODEL_ID:-global.anthropic.claude-opus-5}
-SUPERVISOR_MODEL_ID=${EXISTING_SUPERVISOR_MODEL_ID:-global.anthropic.claude-sonnet-5}
-CODER_MODEL_ID=${EXISTING_CODER_MODEL_ID:-global.anthropic.claude-sonnet-5}
-VALIDATOR_MODEL_ID=${EXISTING_VALIDATOR_MODEL_ID:-global.anthropic.claude-sonnet-5}
-REPORTER_MODEL_ID=${EXISTING_REPORTER_MODEL_ID:-global.anthropic.claude-sonnet-5}
-AUDITOR_MODEL_ID=${EXISTING_AUDITOR_MODEL_ID:-global.anthropic.claude-sonnet-5}
-TRACKER_MODEL_ID=${EXISTING_TRACKER_MODEL_ID:-global.anthropic.claude-sonnet-5}
+PLANNER_MODEL_ID=${EXISTING_PLANNER_MODEL_ID:-global.anthropic.claude-opus-4-6-v1}
+SUPERVISOR_MODEL_ID=${EXISTING_SUPERVISOR_MODEL_ID:-global.anthropic.claude-sonnet-4-5-20250929-v1:0}
+CODER_MODEL_ID=${EXISTING_CODER_MODEL_ID:-global.anthropic.claude-sonnet-4-5-20250929-v1:0}
+VALIDATOR_MODEL_ID=${EXISTING_VALIDATOR_MODEL_ID:-global.anthropic.claude-sonnet-4-5-20250929-v1:0}
+REPORTER_MODEL_ID=${EXISTING_REPORTER_MODEL_ID:-global.anthropic.claude-sonnet-4-5-20250929-v1:0}
+AUDITOR_MODEL_ID=${EXISTING_AUDITOR_MODEL_ID:-global.anthropic.claude-sonnet-4-5-20250929-v1:0}
+TRACKER_MODEL_ID=${EXISTING_TRACKER_MODEL_ID:-global.anthropic.claude-sonnet-4-5-20250929-v1:0}
 
 # ============================================================
 # Phase 1: Infrastructure Outputs
@@ -317,7 +317,7 @@ cat >> "$ENV_FILE" <<EOF
 # ============================================================
 # Web UI Utility Model (column-definitions / sample-prompts auto-gen)
 # ============================================================
-WEB_UTILITY_MODEL_ID=${EXISTING_WEB_UTILITY_MODEL_ID:-global.anthropic.claude-sonnet-5}
+WEB_UTILITY_MODEL_ID=${EXISTING_WEB_UTILITY_MODEL_ID:-global.anthropic.claude-sonnet-4-5-20250929-v1:0}
 EOF
 
 # Preserve existing Runtime configuration (if exists)

@@ -21,4 +21,5 @@ dependencies = [
     "uvicorn>=0.38.0",
     "python-multipart>=0.0.31",
     "fastmcp>=2.10.0",
+    "jupyter>=1.1.1",
 ]

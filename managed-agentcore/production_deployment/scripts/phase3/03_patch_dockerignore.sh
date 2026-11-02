@@ -71,13 +71,13 @@ else
 
     if grep -qF "!README.md" "$TEMPLATE_FILE"; then
         echo "   Found !README.md anchor, adding after it..."
-        sed -i '/!README\.md/a !src/prompts/*.md' "$TEMPLATE_FILE"
+        perl -i -pe 's{^(!README\.md\s*)$}{$1\n!src/prompts/*.md\n}' "$TEMPLATE_FILE"
     elif grep -q "^\*\.md$" "$TEMPLATE_FILE"; then
         echo "   No anchor found, adding after *.md exclusion..."
-        sed -i '/^\*\.md$/a !src/prompts/*.md' "$TEMPLATE_FILE"
+        perl -i -pe 's{^(\*\.md\s*)$}{$1\n!src/prompts/*.md\n}' "$TEMPLATE_FILE"
     elif grep -q "^# Documentation" "$TEMPLATE_FILE"; then
         echo "   Adding in Documentation section..."
-        sed -i '/^# Documentation/a *.md\n!src/prompts/*.md' "$TEMPLATE_FILE"
+        perl -i -pe 's{^(# Documentation\s*)$}{$1\n*.md\n!src/prompts/*.md\n}' "$TEMPLATE_FILE"
     else
         echo "   Adding at end of file..."
         printf '\n# Include prompt templates\n!src/prompts/*.md\n' >> "$TEMPLATE_FILE"
