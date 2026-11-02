@@ -57,3 +57,4 @@ eval-harness/eval_results/
 # Eval runtime ARN written by eval-harness/eval_runtime.py (holds the account id)
 eval-harness/config/eval.env
 eval-harness/eval.env
+/.kiro
