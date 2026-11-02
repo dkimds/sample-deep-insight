@@ -34,4 +34,5 @@ dependencies = [
     "reportlab==4.4.4",
     "markdown==3.10",
     "fpdf2==2.8.5",
+    "jupyter>=1.1.1",
 ]

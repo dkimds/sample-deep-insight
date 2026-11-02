@@ -145,11 +145,42 @@ else
 fi
 
 sh install_korean_font.sh
-sudo apt-get update
-sudo apt-get install pandoc -y
-sudo apt-get install texlive -y
-sudo apt-get install texlive-xetex -y
-sudo apt-get install poppler-utils -y
+
+# PDF/문서 변환 도구 설치 (macOS, Homebrew 기반)
+# Linux 패키지 -> macOS 대응:
+# - pandoc          -> pandoc
+# - texlive         -> basictex (경량 TeX 배포판)
+# - texlive-xetex   -> basictex에 포함된 xetex + tlmgr로 추가 패키지 보강
+# - poppler-utils   -> poppler (pdftoppm 등 PDF 유틸)
+if ! command -v brew &> /dev/null; then
+    print_error "Homebrew가 설치되어 있지 않습니다. https://brew.sh 를 참고해 먼저 설치해주세요."
+    exit 1
+fi
+
+print_info "문서 변환 도구 설치 중 (pandoc, poppler, BasicTeX)..."
+brew update
+
+# Homebrew는 sudo 없이 실행해야 합니다.
+brew install pandoc
+brew install poppler
+
+# BasicTeX (XeTeX 포함, 경량). 이미 xelatex이 있으면 설치를 건너뜁니다.
+if ! command -v xelatex &> /dev/null; then
+    brew install --cask basictex
+    # 설치 직후 PATH에 TeX 바이너리 반영
+    export PATH="/Library/TeX/texbin:$PATH"
+fi
+
+# tlmgr로 XeTeX 조판에 필요한 패키지 보강
+# (tlmgr 자체 업데이트는 네트워크/권한 문제로 실패할 수 있어 실패해도 계속 진행)
+if command -v tlmgr &> /dev/null; then
+    print_info "tlmgr로 XeTeX 관련 패키지를 설치합니다..."
+    sudo tlmgr update --self || print_warning "tlmgr 자체 업데이트에 실패했습니다. 계속 진행합니다."
+    sudo tlmgr install xetex fontspec xunicode euenc collection-xetex || \
+        print_warning "일부 TeX 패키지 설치에 실패했습니다. 수동 설치가 필요할 수 있습니다."
+else
+    print_warning "tlmgr를 찾을 수 없습니다. BasicTeX 설치 후 새 터미널에서 다시 시도해주세요."
+fi
 
 # 5. Jupyter 커널 등록
 print_info "Jupyter 커널 등록 중..."
